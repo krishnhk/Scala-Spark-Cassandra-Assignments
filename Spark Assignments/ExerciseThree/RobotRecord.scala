@@ -1,1 +1,1 @@
-case class RobotRecord(RobotID: String,Type: String, UUID: String)
+case class RobotRecord(RobotID: String, Type: String, UUID: String)
