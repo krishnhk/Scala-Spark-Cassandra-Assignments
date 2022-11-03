@@ -39,7 +39,6 @@ object ExerciseOne extends Serializable {
   }).mkString
 
   def main(args: Array[String]): Unit = {
-
     val spark = SparkSession.builder()
       .appName("Exercise One")
       .master("local[3]")
@@ -62,7 +61,6 @@ object ExerciseOne extends Serializable {
       val verifiedCampLogRDD = campLogRDD.map(row => Header(row._1, row._2.toLong, row._3, row._4, row._5, checkMajor(row._4)))
       val campDS = spark.createDataset(verifiedCampLogRDD).cache()
 
-
       // * Counting number of rows
       val countDs = campDS.count()
       logger.info(countDs)
@@ -72,7 +70,6 @@ object ExerciseOne extends Serializable {
         .mapValues(x => x.individual_ID)
         .reduceGroups(_ max _)
         .show()
-
 
       // * Counting number of rows with int greater than 100
       val higherCount = campDS
