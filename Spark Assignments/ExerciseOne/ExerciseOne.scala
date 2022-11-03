@@ -85,6 +85,8 @@ object ExerciseOne extends Serializable {
       
       campDS.unpersist()
     }
+    runExercise()
+    
     logger.info("Spark Session ends")
     spark.stop()
   }
