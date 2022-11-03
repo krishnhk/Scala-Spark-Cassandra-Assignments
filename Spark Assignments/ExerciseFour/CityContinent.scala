@@ -1,1 +1,1 @@
-case class CityContinent(city: String,continent:String,region:String)
+case class CityContinent(city: String, continent: String, region: String)
