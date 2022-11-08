@@ -6,19 +6,6 @@ import scala.util.Random.nextInt
 object ExerciseTwo extends Serializable {
   @transient lazy val logger: Logger = Logger.getLogger(getClass.getName)
 
-  private def generateRobotType: String = List("AMR", "AGV", "Humanoid", "Hybrid", "Articulated Robot", "Cobot")(nextInt(6))
-
-  private def generateRobotUUID: String = UUID.randomUUID.toString
-
-  private def generateRobotID = s"CR-${(0 until 2).map(_ => nextInt(10)).mkString}"
-
-  private def checkMobility(model: String): String = {
-    model match {
-      case "AMR" | "AGV" | "Humanoid" | "Hybrid" => "Mobile"
-      case "Articulated Robot" | "Cobot" => "Immobile"
-    }
-  }
-
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder()
       .appName("Exercise Two")
@@ -59,5 +46,18 @@ object ExerciseTwo extends Serializable {
 
     logger.info("Spark Session ends")
     spark.stop()
+  }
+  
+  private def generateRobotType: String = List("AMR", "AGV", "Humanoid", "Hybrid", "Articulated Robot", "Cobot")(nextInt(6))
+
+  private def generateRobotUUID: String = UUID.randomUUID.toString
+
+  private def generateRobotID = s"CR-${(0 until 2).map(_ => nextInt(10)).mkString}"
+
+  private def checkMobility(model: String): String = {
+    model match {
+      case "AMR" | "AGV" | "Humanoid" | "Hybrid" => "Mobile"
+      case "Articulated Robot" | "Cobot" => "Immobile"
+    }
   }
 }
