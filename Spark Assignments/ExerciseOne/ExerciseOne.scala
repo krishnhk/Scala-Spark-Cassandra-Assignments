@@ -7,37 +7,6 @@ import scala.util.Random.nextInt
 object ExerciseOne extends Serializable {
   @transient lazy val logger: Logger = Logger.getLogger(getClass.getName)
 
-  // * Generate RandomInt between the given range
-  private def generateCutOff: Int = {
-    val start = 75
-    val end = 150
-    start + nextInt(end - start)
-  }
-
-  // * Check whether the candidate is major or minor
-  private def checkMajor(date: LocalDate): String = {
-    val today = LocalDate.now()
-    val diff = YEARS.between(date, today)
-    if (diff >= 18) "Major" else "Minor"
-  }
-
-  // * Generate PIN of one character and four digit number
-  private def generatePIN = s"${('A' to 'Z') (nextInt(26))}${(0 until 4).map(_ => nextInt(10)).mkString}"
-
-  // * Random Date between the given range
-  private def generateDate(fromDate: LocalDate = LocalDate.of(2001, 1, 1), toDate: LocalDate = LocalDate.of(2005, 12, 31)): LocalDate = {
-    val diff = DAYS.between(fromDate, toDate)
-    val date = fromDate.plusDays(nextInt(diff.toInt))
-    date
-  }
-
-  // * Generate number of 12 digit
-  private def generateIndividualID: String = (0 until 12).map({
-    val start = 1
-    val end = 10
-    _ => start + nextInt(end - start)
-  }).mkString
-
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder()
       .appName("Exercise One")
@@ -87,4 +56,35 @@ object ExerciseOne extends Serializable {
     logger.info("Spark Session ends")
     spark.stop()
   }
+  
+   // * Generate RandomInt between the given range
+  private def generateCutOff: Int = {
+    val start = 75
+    val end = 150
+    start + nextInt(end - start)
+  }
+
+  // * Check whether the candidate is major or minor
+  private def checkMajor(date: LocalDate): String = {
+    val today = LocalDate.now()
+    val diff = YEARS.between(date, today)
+    if (diff >= 18) "Major" else "Minor"
+  }
+
+  // * Generate PIN of one character and four digit number
+  private def generatePIN = s"${('A' to 'Z') (nextInt(26))}${(0 until 4).map(_ => nextInt(10)).mkString}"
+
+  // * Random Date between the given range
+  private def generateDate(fromDate: LocalDate = LocalDate.of(2001, 1, 1), toDate: LocalDate = LocalDate.of(2005, 12, 31)): LocalDate = {
+    val diff = DAYS.between(fromDate, toDate)
+    val date = fromDate.plusDays(nextInt(diff.toInt))
+    date
+  }
+
+  // * Generate number of 12 digit
+  private def generateIndividualID: String = (0 until 12).map({
+    val start = 1
+    val end = 10
+    _ => start + nextInt(end - start)
+  }).mkString
 }
