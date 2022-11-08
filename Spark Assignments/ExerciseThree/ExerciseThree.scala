@@ -6,12 +6,6 @@ import scala.util.Random.nextInt
 object ExerciseThree extends Serializable {
   @transient lazy val logger: Logger = Logger.getLogger(getClass.getName)
 
-  private def getRobotType: String = List("AMR", "AGV", "Humanoid", "Hybrid", "Articulated Robot", "Cobot")(nextInt(6))
-
-  private def generateRobotUUID: String = UUID.randomUUID.toString
-
-  private def generateRobotID = s"CRC-${(0 until 2).map(_ => nextInt(10)).mkString}"
-
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder()
       .appName("Exercise Two")
@@ -54,4 +48,10 @@ object ExerciseThree extends Serializable {
     logger.info("Spark session ends")
     spark.stop()
   }
+  
+  private def getRobotType: String = List("AMR", "AGV", "Humanoid", "Hybrid", "Articulated Robot", "Cobot")(nextInt(6))
+
+  private def generateRobotUUID: String = UUID.randomUUID.toString
+
+  private def generateRobotID = s"CRC-${(0 until 2).map(_ => nextInt(10)).mkString}"
 }
